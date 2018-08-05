@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+    alert('hello');
+    let word = prompt('write your word').split('');
+    let quest = [];
+    for (let i=0; i<word.length; i++) {
+        quest.push("_");
+    }
+    let tries = 0;
+    do {
+        const lett = prompt(quest + ' chose letter. U have ' + (6 - tries) + ' tries left!');
+        if (word.indexOf(lett)>-1){
+            const indices = [];
+            let idx = word.indexOf(lett);
+            while (idx !== -1) {
+                indices.push(idx);
+                idx = word.indexOf(lett, idx + 1);
+            }
+            alert(indices);
+        indices.forEach(function (element) {
+            quest[element]=word[element];
+        });
+        }
+        else {
+            tries++;
+            alert('wrong');
+        }
+        if (quest.toString()=== word.toString()){
+            tries=tries+(6-tries);
+        }
+    }while (tries<6);
+if (quest.toString()=== word.toString()){
+        alert('U won!');
+}
+else {
+        alert('U lose.');
+}
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
