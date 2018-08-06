@@ -25,16 +25,25 @@
             quest[element]=word[element];
         });
         }
+        else if (lett === null ){
+            break
+        }
         else {
             tries++;
             alert('wrong');
         }
         if (quest.toString()=== word.toString()){
-            tries=tries+(6-tries);
+            break
         }
+
     }while (tries<6);
+    //  why the hell 'while (tyres<6|| (quest.toString()=== word.toString()) );'
+    // does not work
 if (quest.toString()=== word.toString()){
         alert('U won!');
+}
+else if (lett===null){
+    alert('U canceled the game by pressing cancel button')
 }
 else {
         alert('U lose.');
