@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress ALL -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,46 +8,60 @@
     alert('hello');
     let word = prompt('write your word').split('');
     let quest = [];
+    const regex = /\w{1}/s;
+    const regex1 = /[A-Z]/s;
+    var lett='';
     for (let i=0; i<word.length; i++) {
+        if (regex1.test(word[i])){
+            word[i]=word[i].toLowerCase();
+        }
         quest.push("_");
     }
     let tries = 0;
     do {
-        const lett = prompt(quest + ' chose letter. U have ' + (6 - tries) + ' tries left!');
-        if (word.indexOf(lett)>-1){
-            const indices = [];
-            let idx = word.indexOf(lett);
-            while (idx !== -1) {
-                indices.push(idx);
-                idx = word.indexOf(lett, idx + 1);
+         lett = prompt(quest + ' chose letter. U have ' + (6 - tries) + ' tries left!');
+        if (regex.test(lett)) {
+            if (regex1.test(lett)){
+                lett.toLowerCase();
             }
-            alert(indices);
-        indices.forEach(function (element) {
-            quest[element]=word[element];
-        });
+            if (word.indexOf(lett) > -1) {
+                const indices = [];
+                let idx = word.indexOf(lett);
+                while (idx !== -1) {
+                    indices.push(idx);
+                    idx = word.indexOf(lett, idx + 1);
+                }
+                alert(indices);
+                indices.forEach(function (element) {
+                    quest[element] = word[element];
+                });
+            }
+            else if (lett === null) {
+                break
+            }
+            else {
+                tries++;
+                alert('wrong');
+            }
+            if (quest.toString() === word.toString()) {
+                break
+            }
         }
-        else if (lett === null ){
-            break
-        }
-        else {
-            tries++;
-            alert('wrong');
-        }
-        if (quest.toString()=== word.toString()){
-            break
+        else{
+            lett = prompt(quest + 'Try normal letter. U have ' + (6 - tries) + ' tries left!');
         }
 
     }while (tries<6);
     //  why the hell 'while (tyres<6|| (quest.toString()=== word.toString()) );'
     // does not work
 if (quest.toString()=== word.toString()){
-        alert('U won! The word was: '+ word.toString()+'U had '+(6-tries)+'more tries left!');
+        alert('U won! The word was: '+ word.toLocaleString()+' U had '+(6-tries)+'more tries left!');
 }
 else if (lett===null){
-    alert('U canceled the game by pressing cancel button. The word was: '+word.toString()+'U had '+(6-tries)+'more tries left!')
+    alert('U canceled the game by pressing cancel button. The word was: "'+word.toString()+'" U had '+(6-tries)+' more tries left!')
 }
 else {
-        alert('U lose. The word was: '+ word.toString());
+        alert('U lose. The word was: "'+ word.toString()+'" !');
 }
 
     </script>
